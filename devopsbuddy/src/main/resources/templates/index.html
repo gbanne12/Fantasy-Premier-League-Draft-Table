@@ -8,6 +8,13 @@
     <p> Enter your team id </p>
     <input id="team-id" type="text" />
 
+    <h1>Form</h1>
+    <form action="#" th:action="@{/index}" th:object="${team}" method="post">
+        <p>Id: <input type="text" th:field="*{id}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+
+
     <div class="col-sm-12">
         <table class="table table-hover">
             <tr th:each="players: ${players}">
