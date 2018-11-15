@@ -41,6 +41,18 @@
                 </table>
             </div>
 
+            <form action="#" th:action="@{/result-month}" th:object="${team}" method="post">
+                <select>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+                <p><input id="submit-button" class="button-primary" type="submit" value="Submit"/></p>
+            </form>
+
+
+
         </div>
     </div>
 </div>
