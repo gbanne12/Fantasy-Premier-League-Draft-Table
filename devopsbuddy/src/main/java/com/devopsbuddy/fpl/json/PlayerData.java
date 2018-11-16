@@ -7,7 +7,6 @@ import java.io.IOException;
 
 public class PlayerData {
 
-    private final int LAST_WEEK_OF_PREVIOUS_MONTH = 7;
     private JSONObject playerData;
 
     public PlayerData(String id) throws IOException {
@@ -21,7 +20,14 @@ public class PlayerData {
                 .toString();
     }
 
-    public int getScore() {
+    public int getScore(int month) {
+        int LAST_WEEK_OF_PREVIOUS_MONTH = 10;
+        if (month == 9) {
+            LAST_WEEK_OF_PREVIOUS_MONTH = 3;
+        } else if (month == 10) {
+            LAST_WEEK_OF_PREVIOUS_MONTH = 7;
+        }
+
         JSONArray scores = (JSONArray) (playerData).get("history");
         String initialScore = ((JSONObject) scores.get(LAST_WEEK_OF_PREVIOUS_MONTH - 1))
                 .get("total_points").toString();

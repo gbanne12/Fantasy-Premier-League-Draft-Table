@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Totalizer {
 
-    public List<Player> getLeagueTable(String playerIdentifier) throws FplResponseException {
+    public List<Player> getLeagueTable(String playerIdentifier, int month) throws FplResponseException {
         List<Player> players = new ArrayList<>();
         try {
             PlayerData initialPlayer = new PlayerData(playerIdentifier);
@@ -20,7 +20,7 @@ public class Totalizer {
             List<String> playerIds = league.getPlayerIds();
             for (String id : playerIds) {
                 PlayerData player = new PlayerData(id);
-                players.add(new Player(player.getName(), player.getTeam(), player.getScore()));
+                players.add(new Player(player.getName(), player.getTeam(), player.getScore(month)));
             }
 
         } catch (IOException exception) {
