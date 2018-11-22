@@ -1,5 +1,6 @@
 package com.devopsbuddy.web.controllers;
 
+import com.devopsbuddy.fpl.Month;
 import com.devopsbuddy.fpl.Player;
 import com.devopsbuddy.fpl.Team;
 import com.devopsbuddy.fpl.Totalizer;
@@ -19,7 +20,7 @@ public class WebController {
     @Value("88888")
     private String teamId;
 
-    @Value("10")
+    @Value("11")
     private int monthId;
 
     @GetMapping("/")
@@ -32,7 +33,7 @@ public class WebController {
     public String submit(@ModelAttribute Team team, Model model) throws IOException {
         teamId = Integer.toString(team.getId());
         Totalizer totalizer = new Totalizer();
-        List<Player> players = totalizer.getLeagueTable(teamId, monthId);
+        List<Player> players = totalizer.getLeagueTable(teamId, getMonth(monthId));
         players.sort((p1, p2) -> p2.getTotal() - p1.getTotal());
         model.addAttribute("players", players);
 
@@ -43,11 +44,25 @@ public class WebController {
     public String monthSelection(@ModelAttribute Team team, Model model) throws IOException {
         monthId = team.getMonth();
         Totalizer totalizer = new Totalizer();
-        List<Player> players = totalizer.getLeagueTable(teamId, monthId);
+        List<Player> players = totalizer.getLeagueTable(teamId, getMonth(monthId));
         players.sort((p1, p2) -> p2.getTotal() - p1.getTotal());
         model.addAttribute("players", players);
 
         return "month";
     }
 
+
+    private Month getMonth(int value) {
+        Month month = Month.NOVEMBER;
+        switch(value) {
+            case 8 : month = Month.AUGUST;
+            case 9: month = Month.SEPTEMBER;
+            break;
+            case 10: month = Month.OCTOBER;
+            break;
+            case 11: month = Month.NOVEMBER;
+            break;
+        }
+        return month;
+    }
 }

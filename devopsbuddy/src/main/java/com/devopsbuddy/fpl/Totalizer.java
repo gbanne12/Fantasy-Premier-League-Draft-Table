@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Totalizer {
 
-    public List<Player> getLeagueTable(String playerIdentifier, int month) throws FplResponseException {
+    public List<Player> getLeagueTable(String playerIdentifier, Month month) throws FplResponseException {
         List<Player> players = new ArrayList<>();
         try {
             PlayerData initialPlayer = new PlayerData(playerIdentifier);
