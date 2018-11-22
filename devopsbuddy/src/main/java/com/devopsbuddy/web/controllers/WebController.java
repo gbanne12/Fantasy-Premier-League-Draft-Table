@@ -56,6 +56,7 @@ public class WebController {
         Month month = Month.NOVEMBER;
         switch(value) {
             case 8 : month = Month.AUGUST;
+            break;
             case 9: month = Month.SEPTEMBER;
             break;
             case 10: month = Month.OCTOBER;
