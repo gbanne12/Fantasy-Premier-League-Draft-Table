@@ -41,13 +41,14 @@
                 </table>
             </div>
 
-            <form action="#" th:action="@{/month}" th:object="${team}" method="post">
+            <form action="#" th:action="@{/result}" th:object="${team}" method="post">
                 <select th:field="*{month}">
                     <option value="9">September</option>
                     <option value="10">October</option>
                     <option value="11">November</option>
                     <option value="12">December</option>
                 </select>
+                <p><input type="text" th:field="*{id}"/></p>
                 <p><input id="submit-button" class="button-primary" type="submit" value="Submit"/></p>
             </form>
 
