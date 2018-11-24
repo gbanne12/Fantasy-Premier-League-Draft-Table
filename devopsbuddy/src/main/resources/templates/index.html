@@ -5,7 +5,7 @@
     <!-- Basic Page Needs
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta charset="utf-8"/>
-    <title>Draft FPL</title>
+    <title>FPL Draft - Monthly Table</title>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
@@ -15,6 +15,7 @@
 
     <!-- FONT
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css"/>
 
     <!-- CSS
@@ -30,11 +31,11 @@
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
-    <div class="row">
+    <div id="content" class="row" >
         <div class="one-half column" style="margin-top: 25%">
             <h4 class="header-text">Enter your team id</h4>
-            <p> You can find your team id in the address bar when viewing the point tab on
-                http://draft.premierleague.com.</p>
+            <p> You can find your team id in the address bar when viewing the game week Points tab.
+            <a href="/how-to"> More info</a> </p>
 
             <form action="#" th:action="@{/result}" th:object="${team}" method="post">
                 <select th:field="*{month}">
