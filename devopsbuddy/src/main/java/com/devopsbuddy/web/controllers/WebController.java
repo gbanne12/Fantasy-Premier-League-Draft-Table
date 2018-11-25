@@ -4,7 +4,6 @@ import com.devopsbuddy.fpl.Month;
 import com.devopsbuddy.fpl.Player;
 import com.devopsbuddy.fpl.Team;
 import com.devopsbuddy.fpl.League;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +15,6 @@ import java.util.List;
 
 @Controller
 public class WebController {
-
-    @Value("77777")
-    private int teamId;
-
-    @Value("11")
-    private int monthId;
 
     @GetMapping("/")
     public String initialise(Model model) {
