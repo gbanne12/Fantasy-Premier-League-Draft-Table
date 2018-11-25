@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Totalizer {
+public class League {
 
-    public List<Player> getLeagueTable(String playerIdentifier, Month month) throws FplResponseException {
+    public List<Player> getData(String playerIdentifier, Month month) throws FplResponseException {
         List<Player> players = new ArrayList<>();
         try {
             PlayerData initialPlayer = new PlayerData(playerIdentifier);
