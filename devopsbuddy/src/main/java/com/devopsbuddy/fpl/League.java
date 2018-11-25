@@ -11,16 +11,16 @@ import java.util.List;
 
 public class League {
 
-    public List<Player> getData(String playerIdentifier, Month month) throws FplResponseException {
+    public List<Player> getData(String playerIdentifier, GameweekMonth gameweekMonth) throws FplResponseException {
         List<Player> players = new ArrayList<>();
         try {
             PlayerData initialPlayer = new PlayerData(playerIdentifier);
-            LeagueData league = new LeagueData(initialPlayer.getLeagueIdentifier());
+            LeagueData leagueData = new LeagueData(initialPlayer.getLeagueIdentifier());
 
-            List<String> playerIds = league.getPlayerIds();
+            List<String> playerIds = leagueData.getPlayerIds();
             for (String id : playerIds) {
                 PlayerData player = new PlayerData(id);
-                players.add(new Player(player.getName(), player.getTeam(), player.getScore(month)));
+                players.add(new Player(player.getName(), player.getTeam(), player.getScore(gameweekMonth)));
             }
 
         } catch (IOException exception) {

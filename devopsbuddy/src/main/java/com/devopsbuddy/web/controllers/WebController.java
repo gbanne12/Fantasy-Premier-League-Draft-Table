@@ -1,6 +1,6 @@
 package com.devopsbuddy.web.controllers;
 
-import com.devopsbuddy.fpl.Month;
+import com.devopsbuddy.fpl.GameweekMonth;
 import com.devopsbuddy.fpl.Player;
 import com.devopsbuddy.fpl.Team;
 import com.devopsbuddy.fpl.League;
@@ -25,31 +25,31 @@ public class WebController {
     @PostMapping("/result")
     public String submit(@ModelAttribute Team team, Model model) throws IOException {
         String teamId = Integer.toString(team.getId());
-        Month month = getMonthFromValue(team.getMonth());
+        GameweekMonth gameweekMonth = getMonthFromValue(team.getMonth());
         League league = new League();
-        List<Player> players = league.getData(teamId, month);
+        List<Player> players = league.getData(teamId, gameweekMonth);
         players.sort((p1, p2) -> p2.getTotal() - p1.getTotal());
 
         model.addAttribute("players", players);
         return "result";
     }
 
-    private Month getMonthFromValue(int value) {
-        Month month = Month.NOVEMBER;
+    private GameweekMonth getMonthFromValue(int value) {
+        GameweekMonth gameweekMonth = GameweekMonth.NOVEMBER;
         switch (value) {
             case 8:
-                month = Month.AUGUST;
+                gameweekMonth = GameweekMonth.AUGUST;
                 break;
             case 9:
-                month = Month.SEPTEMBER;
+                gameweekMonth = GameweekMonth.SEPTEMBER;
                 break;
             case 10:
-                month = Month.OCTOBER;
+                gameweekMonth = GameweekMonth.OCTOBER;
                 break;
             case 11:
-                month = Month.NOVEMBER;
+                gameweekMonth = GameweekMonth.NOVEMBER;
                 break;
         }
-        return month;
+        return gameweekMonth;
     }
 }

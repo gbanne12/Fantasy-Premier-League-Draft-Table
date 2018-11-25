@@ -1,6 +1,6 @@
 package com.devopsbuddy.fpl;
 
-public enum Month {
+public enum GameweekMonth {
 
     AUGUST(1, 3),
     SEPTEMBER(3, 7),
@@ -16,7 +16,7 @@ public enum Month {
     private final int startWeek;
     private final int endWeek;
 
-    Month(int startWeek, int endWeek) {
+    GameweekMonth(int startWeek, int endWeek) {
         this.startWeek = startWeek;
         this.endWeek = endWeek;
     }
