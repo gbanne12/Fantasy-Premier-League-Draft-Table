@@ -18,41 +18,36 @@ public class PlayerData {
         playerData = new JsonRequester().get("https://draft.premierleague.com/api/entry/" + id + "/history");
     }
 
-   public String getLeagueIdentifier() {
+    public String getLeagueIdentifier() {
         JSONObject json = (JSONObject) (playerData).get("entry");
         return ((JSONArray) json.get("league_set")).get(0).toString();
     }
 
-    public int getScore (GameweekMonth month) throws IOException {
+    public int getScore(GameweekMonth month) throws IOException {
         JSONArray scores = (JSONArray) (playerData).get("history");
-        String initialScore = ((JSONObject) scores.get(month.getStartWeek() - 1))
-                .get("total_points")
-                .toString();
 
+        int initialScore = Integer.parseInt(
+                ((JSONObject) scores.get(month.getStartWeek() - 1)).get("total_points").toString());
+
+        int endScore;
         int finalWeek = month.getEndWeek();
-        if (scores.length() < finalWeek) {
+        if (finalWeek >= scores.length()) {
             finalWeek = scores.length();
+            List<String> selections = getCurrentSelections(finalWeek);
+            int inPlayScore = getLiveGameWeekScore(selections);
+            endScore = inPlayScore + Integer.parseInt(
+                    ((JSONObject) scores.get(finalWeek - 2))
+                            .get("total_points")
+                            .toString());
+
+        } else {
+            endScore = Integer.parseInt(
+                    ((JSONObject) scores.get(finalWeek - 1))
+                            .get("total_points")
+                            .toString());
         }
 
-        //////////////////////////////////////////////
-       /* JSONObject currentWeek = new JsonRequester().get("https://draft.premierleague.com/api/entry/" + id
-                + "/event/" + Integer.toString(scores.length() - 1));
-        JSONArray selectionsJson = currentWeek.getJSONArray("picks");
-
-        List<String> selections = new ArrayList<>();
-        for (int i = 0; i < selectionsJson.length(); i++) {
-            selections.add(((JSONObject) selectionsJson.get(i)).get("element").toString());
-        }
-
-        JSONObject liveData = new JsonRequester().get("https://draft.premierleague.com/api/event/"
-                + Integer.toString(scores.length() - 1) + "/live";*/
-
-
-        /////////////////////////////////////////
-        String endScore = ((JSONObject) scores.get(finalWeek- 1))
-                .get("total_points")
-                .toString();
-        return Integer.parseInt(endScore) - Integer.parseInt(initialScore);
+        return endScore - initialScore;
     }
 
     public String getName() {
@@ -64,5 +59,32 @@ public class PlayerData {
     public String getTeam() {
         JSONObject json = (JSONObject) (playerData).get("entry");
         return json.get("name").toString();
+    }
+
+    private List<String> getCurrentSelections(int week) throws IOException {
+        JSONObject currentWeek = new JsonRequester().get("https://draft.premierleague.com/api/entry/"
+                + id + "/event/" + week);
+        JSONArray currentTeam = currentWeek.getJSONArray("picks");
+
+        List<String> selectionIds = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            selectionIds.add(((JSONObject) currentTeam.get(i)).get("element").toString());
+        }
+        return selectionIds;
+    }
+
+    private int getLiveGameWeekScore(List<String> selectionIds) throws IOException {
+        int week = ((JSONArray) (playerData).get("history")).length();
+        JSONObject liveData = new JsonRequester().get("https://draft.premierleague.com/api/event/" + week + "/live");
+        JSONObject elements = (JSONObject) liveData.get("elements");
+
+        int total = 0;
+        for (String id : selectionIds) {
+            JSONObject currentSelection = (JSONObject) elements.get(id);
+            int points = ((JSONObject) currentSelection.get("stats")).getInt("total_points");
+            total = total + points;
+        }
+
+        return total;
     }
 }
