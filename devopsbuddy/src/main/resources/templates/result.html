@@ -33,15 +33,15 @@
             <h4 class="header-text">Live Table</h4>
 
             <form action="#" th:action="@{/result}" th:object="${team}" method="post">
-                <label for="team-id">Team ID:</label>
+                <label class="fpl-green" for="team-id">Team ID</label>
                 <input id="team-id" type="text" th:field="*{id}"/>
 
                 <div class="col-sm-12">
                     <table class="table table-hover">
                         <tr>
-                            <th>Team</th>
-                            <th>Player</th>
-                            <th>Total</th>
+                            <th class="fpl-green">Team</th>
+                            <th class="fpl-green">Player</th>
+                            <th class="fpl-green">Total</th>
                         </tr>
                         <tr th:each="players: ${players}">
                             <td th:text="${players.teamName}"></td>
