@@ -2,9 +2,14 @@
    background-color: #3FBF7F;
 }
 
+.fpl-green{
+    color: #3FBF7F
+}
+
 .header-text {
    color: #441673;
 }
+
 h4 {
 font-size: 4.0rem;
 }
