@@ -30,27 +30,22 @@
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
-    <div id="content" class="row" >
+    <div id="content" class="row">
         <div class="one-half column" style="margin-top: 25%">
             <h4 class="header-text">Enter your team id</h4>
             <p> You can find your team id in the address bar when viewing the game week Points tab.
-            <a href="/how-to"> More info</a> </p>
+                <a href="/how-to"> More info</a></p>
 
             <form action="#" th:action="@{/result}" th:object="${userInput}" method="post">
-                <select th:field="*{month}">
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
+
+                <select th:value="*{month}" th:name="${currentMonth}">
+                    <option th:each="month : ${months}"
+                            th:value="${month.value}"
+                            th:text="${month.name}"
+                            th:selected="${currentMonth == month.value}">>
+                    </option>
                 </select>
+
                 <p><input type="text" th:field="*{id}"/></p>
                 <p><input id="submit-button" class="button-primary" type="submit" value="Submit"/></p>
             </form>

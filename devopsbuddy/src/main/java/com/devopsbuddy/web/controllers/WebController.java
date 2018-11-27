@@ -1,9 +1,6 @@
 package com.devopsbuddy.web.controllers;
 
-import com.devopsbuddy.fpl.GameweekMonth;
-import com.devopsbuddy.fpl.Player;
-import com.devopsbuddy.fpl.UserInput;
-import com.devopsbuddy.fpl.League;
+import com.devopsbuddy.fpl.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +8,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.spi.CalendarDataProvider;
 
 @Controller
 public class WebController {
 
+    List<Month> months = new ArrayList<>();
+
     @GetMapping("/")
     public String initialise(Model model) {
+
+        months.add(new Month("August", Calendar.AUGUST));
+        months.add(new Month("Sepetember", Calendar.SEPTEMBER));
+        months.add(new Month("October", Calendar.OCTOBER));
+        months.add(new Month("November", Calendar.NOVEMBER));
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        model.addAttribute("currentMonth", currentMonth);
+        model.addAttribute("months", months);
         model.addAttribute("userInput", new UserInput());
         return "index";
     }
