@@ -36,7 +36,7 @@
             <p> You can find your team id in the address bar when viewing the game week Points tab.
             <a href="/how-to"> More info</a> </p>
 
-            <form action="#" th:action="@{/result}" th:object="${team}" method="post">
+            <form action="#" th:action="@{/result}" th:object="${userInput}" method="post">
                 <select th:field="*{month}">
                     <option value="1">January</option>
                     <option value="2">February</option>

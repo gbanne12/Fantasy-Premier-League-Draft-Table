@@ -2,7 +2,7 @@ package com.devopsbuddy.web.controllers;
 
 import com.devopsbuddy.fpl.GameweekMonth;
 import com.devopsbuddy.fpl.Player;
-import com.devopsbuddy.fpl.Team;
+import com.devopsbuddy.fpl.UserInput;
 import com.devopsbuddy.fpl.League;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +18,14 @@ public class WebController {
 
     @GetMapping("/")
     public String initialise(Model model) {
-        model.addAttribute("team", new Team());
+        model.addAttribute("userInput", new UserInput());
         return "index";
     }
 
     @PostMapping("/result")
-    public String submit(@ModelAttribute Team team, Model model) throws IOException {
-        String teamId = Integer.toString(team.getId());
-        GameweekMonth gameweekMonth = getMonthFromValue(team.getMonth());
+    public String submit(@ModelAttribute UserInput userInput, Model model) throws IOException {
+        String teamId = Integer.toString(userInput.getId());
+        GameweekMonth gameweekMonth = getMonthFromValue(userInput.getMonth());
         League league = new League();
         List<Player> players = league.getData(teamId, gameweekMonth);
         players.sort((p1, p2) -> p2.getTotal() - p1.getTotal());

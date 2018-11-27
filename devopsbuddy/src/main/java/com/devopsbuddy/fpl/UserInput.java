@@ -1,6 +1,6 @@
 package com.devopsbuddy.fpl;
 
-public class Team {
+public class UserInput {
 
     private int id;
     private int month;
