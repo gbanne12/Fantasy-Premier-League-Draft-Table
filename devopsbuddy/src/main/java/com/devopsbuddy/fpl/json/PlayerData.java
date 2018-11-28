@@ -25,6 +25,10 @@ public class PlayerData {
 
     public int getScore(GameweekMonth month) throws IOException {
         JSONArray scores = (JSONArray) (playerData).get("history");
+        
+        if (month.getStartWeek() > scores.length()) {
+            return 0;
+        }
 
         int initialScore = Integer.parseInt(
                 ((JSONObject) scores.get(month.getStartWeek() - 1)).get("total_points").toString());
