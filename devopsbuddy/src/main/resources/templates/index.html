@@ -38,11 +38,11 @@
 
             <form action="#" th:action="@{/result}" th:object="${userInput}" method="post">
 
-                <select th:value="*{month}" th:name="${currentMonth}">
-                    <option th:each="month : ${months}"
-                            th:value="${month.value}"
-                            th:text="${month.name}"
-                            th:selected="${currentMonth == month.value}">>
+                <select th:id="month" th:name="month" >
+                    <option th:each="option : ${months}"
+                            th:value="${option.value}"
+                            th:text="${option.name}"
+                            th:selected="${currentMonth == option.value}" >
                     </option>
                 </select>
 
