@@ -14,6 +14,7 @@ class PlayerDataSpec extends Specification {
         PlayerData data = new PlayerData("235052")
 
         expect:
+        data.getLeagueIdentifier() != null
         data.getLeagueIdentifier() == "31657"
     }
 
@@ -22,6 +23,7 @@ class PlayerDataSpec extends Specification {
         PlayerData data = new PlayerData("235052")
 
         expect:
+        data.getName() != null
         data.getName() == "Gary Bannerman"
     }
 
@@ -30,6 +32,7 @@ class PlayerDataSpec extends Specification {
         PlayerData data = new PlayerData("235052")
 
         expect:
+        data.getTeam() != null
         data.getTeam() == "Three-peat"
     }
 
@@ -38,6 +41,7 @@ class PlayerDataSpec extends Specification {
         PlayerData data = new PlayerData("235052")
 
         expect:
+        data.getScore(GameweekMonth.SEPTEMBER) > 0
         data.getScore(GameweekMonth.SEPTEMBER) == 179
     }
 }
