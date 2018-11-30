@@ -16,7 +16,7 @@ import java.util.spi.CalendarDataProvider;
 @Controller
 public class WebController {
 
-    MonthProvider monthProvider = new MonthProvider();
+    private MonthProvider monthProvider = new MonthProvider();
 
     @GetMapping("/")
     public String initialise(Model model) {
@@ -29,6 +29,11 @@ public class WebController {
         model.addAttribute("currentMonth", currentMonth);
 
         return "index";
+    }
+
+    @GetMapping("how-to")
+    public String helpPage(Model model) {
+        return "howto";
     }
 
     @PostMapping("/result")
