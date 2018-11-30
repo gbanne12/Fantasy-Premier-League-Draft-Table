@@ -28,6 +28,11 @@ public class WebController {
         return "index";
     }
 
+    @GetMapping("how-to")
+    public String helpPage(Model model) {
+        return "howto";
+    }
+
     @PostMapping("/result")
     public String submit(@ModelAttribute UserInput userInput, Model model) throws IOException {
         List<Month> months = monthProvider.getList();
