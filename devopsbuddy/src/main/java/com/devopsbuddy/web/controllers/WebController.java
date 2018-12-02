@@ -4,21 +4,23 @@ import com.devopsbuddy.exceptions.FplResponseException;
 import com.devopsbuddy.fpl.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
 @Controller
 public class WebController {
 
+    private static UserInput userInput = new UserInput();
     private MonthProvider monthProvider = new MonthProvider();
 
     @GetMapping("/")
-    public String initialise(@ModelAttribute UserInput userInput, Model model) {
+    public String initialise(Model model) {
+        model.addAttribute("userInput", userInput);
+
         List<Month> months = monthProvider.getList();
         model.addAttribute("months", months);
 
@@ -34,16 +36,27 @@ public class WebController {
     }
 
     @PostMapping("/result")
-    public String submit(@ModelAttribute UserInput userInput, Model model) throws IOException {
+    public ModelAndView redirect(@ModelAttribute UserInput userInput, ModelMap model) {
+        model.addAttribute("teamIdentifier", userInput.getId());
+        model.addAttribute("month", userInput.getMonth());
+        model.addAttribute("userInput", userInput);
+
+        return new ModelAndView("redirect:/{teamIdentifier}/{month}", model);
+    }
+
+    @RequestMapping("{teamIdentifier}/{month}")
+    public String displayResults(@ModelAttribute UserInput userInput,
+                                 @PathVariable("teamIdentifier") String team,
+                                 @PathVariable("month") String month,
+                                 Model model) {
         List<Month> months = monthProvider.getList();
         model.addAttribute("months", months);
+        model.addAttribute("userInput", userInput);
 
-        String teamId = Integer.toString(userInput.getId());
-        GameweekMonth gameweekMonth = getMonthFromValue(userInput.getMonth());
 
         try {
             League league = new League();
-            List<Player> players = league.getData(teamId, gameweekMonth);
+            List<Player> players = league.getData(team, getMonthFromValue(Integer.parseInt(month)));
             players.sort((p1, p2) -> p2.getTotal() - p1.getTotal());
             model.addAttribute("players", players);
 
@@ -51,7 +64,7 @@ public class WebController {
             return "team-not-found";
         }
 
-       return "result";
+        return "result";
     }
 
     private GameweekMonth getMonthFromValue(int value) {
