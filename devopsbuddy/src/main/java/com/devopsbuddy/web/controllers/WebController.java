@@ -14,19 +14,18 @@ import java.util.List;
 @Controller
 public class WebController {
 
-    private static UserInput userInput = new UserInput();
-    private MonthProvider monthProvider = new MonthProvider();
-
-    @GetMapping("/")
-    public String initialise(Model model) {
-        model.addAttribute("userInput", userInput);
-
+    @ModelAttribute
+    public void addMonthList(Model model) {
+        MonthProvider monthProvider = new MonthProvider();
         List<Month> months = monthProvider.getList();
         model.addAttribute("months", months);
+    }
 
+    @GetMapping("/")
+    public String indexPage(Model model) {
         int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
         model.addAttribute("currentMonth", currentMonth);
-
+        model.addAttribute("userInput", new UserInput());
         return "index";
     }
 
@@ -37,33 +36,24 @@ public class WebController {
 
     @PostMapping("/result")
     public ModelAndView redirect(@ModelAttribute UserInput userInput, ModelMap model) {
-        model.addAttribute("teamIdentifier", userInput.getId());
+        model.addAttribute("id", userInput.getId());
         model.addAttribute("month", userInput.getMonth());
-        model.addAttribute("userInput", userInput);
 
-        return new ModelAndView("redirect:/{teamIdentifier}/{month}", model);
+        return new ModelAndView("redirect:/{id}/{month}", model);
     }
 
-    @RequestMapping("{teamIdentifier}/{month}")
-    public String displayResults(@ModelAttribute UserInput userInput,
-                                 @PathVariable("teamIdentifier") String team,
-                                 @PathVariable("month") String month,
-                                 Model model) {
-        List<Month> months = monthProvider.getList();
-        model.addAttribute("months", months);
-        model.addAttribute("userInput", userInput);
-
-
+    @RequestMapping("{id}/{month}")
+    public String displayResults(Model model, @ModelAttribute UserInput userInput,
+                                 @PathVariable("id") String id, @PathVariable("month") String month) {
+        userInput.setId(Integer.parseInt(id));
         try {
             League league = new League();
-            List<Player> players = league.getData(team, getMonthFromValue(Integer.parseInt(month)));
+            List<Player> players = league.getData(id, getMonthFromValue(Integer.parseInt(month)));
             players.sort((p1, p2) -> p2.getTotal() - p1.getTotal());
             model.addAttribute("players", players);
-
         } catch (FplResponseException e) {
             return "team-not-found";
         }
-
         return "result";
     }
 
