@@ -20,9 +20,9 @@
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="css/normalize.css"/>
-    <link rel="stylesheet" href="css/skeleton.css"/>
-    <link rel="stylesheet" href="css/custom.css"/>
+    <link rel="stylesheet" href="/css/normalize.css"/>
+    <link rel="stylesheet" href="/css/skeleton.css"/>
+    <link rel="stylesheet" href="/css/custom.css"/>
 
 </head>
 <body>
@@ -36,7 +36,7 @@
             <p> You can find your team id in the address bar when viewing the game week Points tab.
                 <a href="/how-to"> More info</a></p>
 
-            <form action="#" th:action="@{/result}" th:object="${userInput}" method="post">
+               <form action="#" th:object="${userInput}" th:action="@{/result}" method="post">
 
                 <select th:id="month" th:name="month" >
                     <option th:each="option : ${months}"

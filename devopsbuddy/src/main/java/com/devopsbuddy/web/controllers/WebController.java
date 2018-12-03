@@ -38,59 +38,23 @@ public class WebController {
     public ModelAndView redirect(@ModelAttribute UserInput userInput, ModelMap model) {
         model.addAttribute("id", userInput.getId());
         model.addAttribute("month", userInput.getMonth());
-
         return new ModelAndView("redirect:/{id}/{month}", model);
     }
 
     @RequestMapping("{id}/{month}")
-    public String displayResults(Model model, @ModelAttribute UserInput userInput,
-                                 @PathVariable("id") String id, @PathVariable("month") String month) {
+    public String displayResults(@PathVariable("id") String id,
+                                 @PathVariable("month") String month,
+                                 @ModelAttribute UserInput userInput,
+                                 Model model) {
         userInput.setId(Integer.parseInt(id));
+
         try {
             League league = new League();
-            List<Player> players = league.getData(id, getMonthFromValue(Integer.parseInt(month)));
-            players.sort((p1, p2) -> p2.getTotal() - p1.getTotal());
+            List<Player> players = league.getOrderedList(id, Integer.parseInt(month));
             model.addAttribute("players", players);
         } catch (FplResponseException e) {
             return "team-not-found";
         }
         return "result";
-    }
-
-    private GameweekMonth getMonthFromValue(int value) {
-        GameweekMonth gameweekMonth = GameweekMonth.NOVEMBER;
-        switch (value) {
-            case 0:
-                gameweekMonth = GameweekMonth.JANUARY;
-                break;
-            case 1:
-                gameweekMonth = GameweekMonth.FEBRUARY;
-                break;
-            case 2:
-                gameweekMonth = GameweekMonth.MARCH;
-                break;
-            case 3:
-                gameweekMonth = GameweekMonth.APRIL;
-                break;
-            case 4:
-                gameweekMonth = GameweekMonth.MAY;
-                break;
-            case 7:
-                gameweekMonth = GameweekMonth.AUGUST;
-                break;
-            case 8:
-                gameweekMonth = GameweekMonth.SEPTEMBER;
-                break;
-            case 9:
-                gameweekMonth = GameweekMonth.OCTOBER;
-                break;
-            case 10:
-                gameweekMonth = GameweekMonth.NOVEMBER;
-                break;
-            case 11:
-                gameweekMonth = GameweekMonth.DECEMBER;
-                break;
-        }
-        return gameweekMonth;
     }
 }
