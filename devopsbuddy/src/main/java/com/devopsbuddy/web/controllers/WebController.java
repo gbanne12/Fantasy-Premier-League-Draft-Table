@@ -44,7 +44,13 @@ public class WebController {
     @RequestMapping("{id}/{month}")
     public String displayResults(@PathVariable("id") String id, @PathVariable("month") String month,
                                  @ModelAttribute UserInput userInput, Model model) {
-        int monthValue = Integer.parseInt(month);
+        if (month.equals("current")) {
+            month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH) + 1);
+            userInput.setMonth(month);
+        }
+
+        int monthValue;
+        monthValue = Integer.parseInt(month);
         if (monthValue < 1 || monthValue > 12 || monthValue == 6 || monthValue == 7) {
             return "error";
         }

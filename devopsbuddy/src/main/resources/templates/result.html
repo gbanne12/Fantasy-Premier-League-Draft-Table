@@ -51,7 +51,7 @@
                     </table>
                 </div>
 
-                <select th:id="month" th:field="*{month}" >
+                <select th:id="month" th:field="*{month}">
                     <option th:each="option : ${months}"
                             th:value="${option.value}"
                             th:text="${option.name}">
@@ -64,6 +64,12 @@
 
         </div>
     </div>
+
+
+    <h5 class="header-text">Tip</h5>
+    <p> You can bookmark this page to avoid entering the team id each time.
+        You can also default to the current calendar month. <a href="/*{id}/current"> More info</a></p>
+
 </div>
 
 <!-- End Document

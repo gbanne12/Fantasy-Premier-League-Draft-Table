@@ -3,13 +3,13 @@ package com.devopsbuddy.fpl;
 public class UserInput {
 
     private int id;
-    private int month;
+    private String month;
 
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 
