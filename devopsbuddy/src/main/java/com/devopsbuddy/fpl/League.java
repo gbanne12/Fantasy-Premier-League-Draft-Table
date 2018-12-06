@@ -33,34 +33,34 @@ public class League {
     private GameMonth getMonthFromValue(int value) {
         GameMonth gameweekMonth = GameMonth.NOVEMBER;
         switch (value) {
-            case 0:
+            case 1:
                 gameweekMonth = GameMonth.JANUARY;
                 break;
-            case 1:
+            case 2:
                 gameweekMonth = GameMonth.FEBRUARY;
                 break;
-            case 2:
+            case 3:
                 gameweekMonth = GameMonth.MARCH;
                 break;
-            case 3:
+            case 4:
                 gameweekMonth = GameMonth.APRIL;
                 break;
-            case 4:
+            case 5:
                 gameweekMonth = GameMonth.MAY;
                 break;
-            case 7:
+            case 8:
                 gameweekMonth = GameMonth.AUGUST;
                 break;
-            case 8:
+            case 9:
                 gameweekMonth = GameMonth.SEPTEMBER;
                 break;
-            case 9:
+            case 10:
                 gameweekMonth = GameMonth.OCTOBER;
                 break;
-            case 10:
+            case 11:
                 gameweekMonth = GameMonth.NOVEMBER;
                 break;
-            case 11:
+            case 12:
                 gameweekMonth = GameMonth.DECEMBER;
                 break;
         }
