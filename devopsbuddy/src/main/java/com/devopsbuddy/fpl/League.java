@@ -30,38 +30,38 @@ public class League {
         return players;
     }
 
-    private GameweekMonth getMonthFromValue(int value) {
-        GameweekMonth gameweekMonth = GameweekMonth.NOVEMBER;
+    private GameMonth getMonthFromValue(int value) {
+        GameMonth gameweekMonth = GameMonth.NOVEMBER;
         switch (value) {
             case 0:
-                gameweekMonth = GameweekMonth.JANUARY;
+                gameweekMonth = GameMonth.JANUARY;
                 break;
             case 1:
-                gameweekMonth = GameweekMonth.FEBRUARY;
+                gameweekMonth = GameMonth.FEBRUARY;
                 break;
             case 2:
-                gameweekMonth = GameweekMonth.MARCH;
+                gameweekMonth = GameMonth.MARCH;
                 break;
             case 3:
-                gameweekMonth = GameweekMonth.APRIL;
+                gameweekMonth = GameMonth.APRIL;
                 break;
             case 4:
-                gameweekMonth = GameweekMonth.MAY;
+                gameweekMonth = GameMonth.MAY;
                 break;
             case 7:
-                gameweekMonth = GameweekMonth.AUGUST;
+                gameweekMonth = GameMonth.AUGUST;
                 break;
             case 8:
-                gameweekMonth = GameweekMonth.SEPTEMBER;
+                gameweekMonth = GameMonth.SEPTEMBER;
                 break;
             case 9:
-                gameweekMonth = GameweekMonth.OCTOBER;
+                gameweekMonth = GameMonth.OCTOBER;
                 break;
             case 10:
-                gameweekMonth = GameweekMonth.NOVEMBER;
+                gameweekMonth = GameMonth.NOVEMBER;
                 break;
             case 11:
-                gameweekMonth = GameweekMonth.DECEMBER;
+                gameweekMonth = GameMonth.DECEMBER;
                 break;
         }
         return gameweekMonth;

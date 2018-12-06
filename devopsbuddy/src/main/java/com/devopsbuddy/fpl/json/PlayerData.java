@@ -1,6 +1,6 @@
 package com.devopsbuddy.fpl.json;
 
-import com.devopsbuddy.fpl.GameweekMonth;
+import com.devopsbuddy.fpl.GameMonth;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -23,7 +23,7 @@ public class PlayerData {
         return ((JSONArray) json.get("league_set")).get(0).toString();
     }
 
-    public int getScore(GameweekMonth month) throws IOException {
+    public int getScore(GameMonth month) throws IOException {
         JSONArray scores = (JSONArray) (playerData).get("history");
         
         if (month.getStartWeek() > scores.length()) {

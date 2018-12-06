@@ -1,4 +1,4 @@
-import com.devopsbuddy.fpl.GameweekMonth
+import com.devopsbuddy.fpl.GameMonth
 import com.devopsbuddy.fpl.json.PlayerData
 import spock.lang.Specification
 
@@ -41,7 +41,7 @@ class PlayerDataSpec extends Specification {
         PlayerData data = new PlayerData("235052")
 
         expect:
-        data.getScore(GameweekMonth.SEPTEMBER) > 0
-        data.getScore(GameweekMonth.SEPTEMBER) == 179
+        data.getScore(GameMonth.SEPTEMBER) > 0
+        data.getScore(GameMonth.SEPTEMBER) == 179
     }
 }
