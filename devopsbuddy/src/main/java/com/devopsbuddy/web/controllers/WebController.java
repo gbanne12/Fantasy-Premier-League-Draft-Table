@@ -23,7 +23,7 @@ public class WebController {
 
     @GetMapping("/")
     public String indexPage(Model model) {
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
         model.addAttribute("currentMonth", currentMonth);
         model.addAttribute("userInput", new UserInput());
         return "index";
