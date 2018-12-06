@@ -42,12 +42,14 @@ public class WebController {
     }
 
     @RequestMapping("{id}/{month}")
-    public String displayResults(@PathVariable("id") String id,
-                                 @PathVariable("month") String month,
-                                 @ModelAttribute UserInput userInput,
-                                 Model model) {
-        userInput.setId(Integer.parseInt(id));
+    public String displayResults(@PathVariable("id") String id, @PathVariable("month") String month,
+                                 @ModelAttribute UserInput userInput, Model model) {
+        int monthValue = Integer.parseInt(month);
+        if (monthValue < 1 || monthValue > 12 || monthValue == 6 || monthValue == 7) {
+            return "error";
+        }
 
+        userInput.setId(Integer.parseInt(id));
         try {
             League league = new League();
             List<Player> players = league.getOrderedList(id, Integer.parseInt(month));
