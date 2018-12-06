@@ -25,13 +25,21 @@ public class PlayerData {
 
     public int getScore(GameMonth month) throws IOException {
         JSONArray scores = (JSONArray) (playerData).get("history");
-        
-        if (month.getStartWeek() > scores.length()) {
+
+        boolean futureMonth = month.getStartWeek() > scores.length();
+        if (futureMonth) {
             return 0;
         }
 
-        int initialScore = Integer.parseInt(
-                ((JSONObject) scores.get(month.getStartWeek() - 1)).get("total_points").toString());
+        int initialScore;
+        boolean firstMonthOfSeason = month.getStartWeek() == 1;
+        if (firstMonthOfSeason) {
+            initialScore = 0;
+        } else {
+            initialScore = Integer.parseInt(
+                    ((JSONObject) scores.get(month.getStartWeek() - 1)).get("total_points").toString());
+        }
+
 
         int endScore;
         int finalWeek = month.getEndWeek();
