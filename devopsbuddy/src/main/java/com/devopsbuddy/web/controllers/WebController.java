@@ -23,7 +23,7 @@ public class WebController {
 
     @GetMapping("/")
     public String indexPage(Model model) {
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
         model.addAttribute("currentMonth", currentMonth);
         model.addAttribute("userInput", new UserInput());
         return "index";
@@ -42,12 +42,20 @@ public class WebController {
     }
 
     @RequestMapping("{id}/{month}")
-    public String displayResults(@PathVariable("id") String id,
-                                 @PathVariable("month") String month,
-                                 @ModelAttribute UserInput userInput,
-                                 Model model) {
-        userInput.setId(Integer.parseInt(id));
+    public String displayResults(@PathVariable("id") String id, @PathVariable("month") String month,
+                                 @ModelAttribute UserInput userInput, Model model) {
+        if (month.equals("current")) {
+            month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH) + 1);
+            userInput.setMonth(month);
+        }
 
+        int monthValue;
+        monthValue = Integer.parseInt(month);
+        if (monthValue < 1 || monthValue > 12 || monthValue == 6 || monthValue == 7) {
+            return "error";
+        }
+
+        userInput.setId(Integer.parseInt(id));
         try {
             League league = new League();
             List<Player> players = league.getOrderedList(id, Integer.parseInt(month));

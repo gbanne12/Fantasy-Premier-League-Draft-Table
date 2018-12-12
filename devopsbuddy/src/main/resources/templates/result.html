@@ -19,9 +19,9 @@
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="/css/normalize.css"/>
-    <link rel="stylesheet" href="/css/skeleton.css"/>
-    <link rel="stylesheet" href="/css/custom.css"/>
+    <link rel="stylesheet" href="/normalize.css"/>
+    <link rel="stylesheet" href="/skeleton.css"/>
+    <link rel="stylesheet" href="/custom.css"/>
 </head>
 <body>
 <!-- Primary Page Layout
@@ -51,7 +51,7 @@
                     </table>
                 </div>
 
-                <select th:id="month" th:field="*{month}" >
+                <select th:id="month" th:field="*{month}">
                     <option th:each="option : ${months}"
                             th:value="${option.value}"
                             th:text="${option.name}">
@@ -64,6 +64,15 @@
 
         </div>
     </div>
+
+
+
+    <p> You can bookmark this page to skip entering the team id each time.
+        You can also default to the current calendar month.
+    <a th:href="@{current}"> More info</a>
+    </p>
+
+
 </div>
 
 <!-- End Document
