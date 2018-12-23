@@ -44,4 +44,18 @@ class PlayerDataSpec extends Specification {
         data.getScore(GameMonth.SEPTEMBER) > 0
         data.getScore(GameMonth.SEPTEMBER) == 179
     }
+
+    def "can get the monthly totals from the player identifier"() {
+        expect:
+        PlayerData data = new PlayerData("235052")
+        data.getScore(month) == total
+
+        where:
+        month | total
+        GameMonth.SEPTEMBER | 179
+        GameMonth.AUGUST | 131
+        GameMonth.MAY | 0
+
+
+    }
 }

@@ -7,11 +7,11 @@ public enum GameMonth {
     OCTOBER(7, 10),
     NOVEMBER(10, 14),
     DECEMBER(14, 20),
-    JANUARY(14, 20),
-    FEBRUARY(14, 20),
-    MARCH(14, 20),
-    APRIL(14, 20),
-    MAY(14, 20);
+    JANUARY(20, 24),
+    FEBRUARY(24, 28),
+    MARCH(28, 32),
+    APRIL(32, 36),
+    MAY(36, 38);
 
     private final int startWeek;
     private final int endWeek;
