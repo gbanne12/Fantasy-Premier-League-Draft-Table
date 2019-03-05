@@ -26,8 +26,8 @@ public class PlayerData {
     public int getScore(GameMonth month) throws IOException {
         JSONArray scores = (JSONArray) (playerData).get("history");
 
-        boolean futureMonth = month.getStartWeek() > scores.length();
-        if (futureMonth) {
+        boolean isFutureMonth = month.getStartWeek() >= scores.length();
+        if (isFutureMonth) {
             return 0;
         }
 
