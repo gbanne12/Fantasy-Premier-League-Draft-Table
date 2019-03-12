@@ -1,7 +1,11 @@
 package com.devopsbuddy.web.controllers;
 
 import com.devopsbuddy.exceptions.FplResponseException;
-import com.devopsbuddy.fpl.*;
+import com.devopsbuddy.model.League;
+import com.devopsbuddy.model.Month;
+import com.devopsbuddy.model.Player;
+import com.devopsbuddy.web.util.MonthProvider;
+import com.devopsbuddy.web.util.UserInput;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;

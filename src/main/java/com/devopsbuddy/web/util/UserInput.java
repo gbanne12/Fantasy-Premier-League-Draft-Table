@@ -1,4 +1,4 @@
-package com.devopsbuddy.fpl;
+package com.devopsbuddy.web.util;
 
 public class UserInput {
 

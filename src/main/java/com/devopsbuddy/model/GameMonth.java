@@ -1,4 +1,4 @@
-package com.devopsbuddy.fpl;
+package com.devopsbuddy.model;
 
 public enum GameMonth {
 

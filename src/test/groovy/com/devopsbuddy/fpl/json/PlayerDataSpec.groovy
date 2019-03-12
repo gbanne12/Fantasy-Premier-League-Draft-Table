@@ -1,4 +1,4 @@
-import com.devopsbuddy.fpl.GameMonth
+import com.devopsbuddy.model.GameMonth
 import com.devopsbuddy.fpl.json.PlayerData
 import spock.lang.Specification
 

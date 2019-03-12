@@ -1,9 +1,11 @@
-package com.devopsbuddy.fpl;
+package com.devopsbuddy.model;
 
 
 import com.devopsbuddy.exceptions.FplResponseException;
 import com.devopsbuddy.fpl.json.LeagueData;
 import com.devopsbuddy.fpl.json.PlayerData;
+import com.devopsbuddy.model.GameMonth;
+import com.devopsbuddy.model.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;

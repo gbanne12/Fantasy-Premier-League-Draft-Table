@@ -1,6 +1,6 @@
 package com.devopsbuddy.fpl.json;
 
-import com.devopsbuddy.fpl.GameMonth;
+import com.devopsbuddy.model.GameMonth;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
