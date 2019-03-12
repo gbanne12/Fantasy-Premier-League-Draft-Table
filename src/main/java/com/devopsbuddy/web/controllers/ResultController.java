@@ -9,33 +9,23 @@ import com.devopsbuddy.web.util.UserInput;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Calendar;
 import java.util.List;
 
 @Controller
-public class WebController {
+public class ResultController {
 
     @ModelAttribute
     public void addMonthList(Model model) {
         MonthProvider monthProvider = new MonthProvider();
         List<Month> months = monthProvider.getList();
         model.addAttribute("months", months);
-    }
-
-    @GetMapping("/")
-    public String indexPage(Model model) {
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        model.addAttribute("currentMonth", currentMonth);
-        model.addAttribute("userInput", new UserInput());
-        return "index";
-    }
-
-    @GetMapping("how-to")
-    public String helpPage(Model model) {
-        return "howto";
     }
 
     @PostMapping("/result")
