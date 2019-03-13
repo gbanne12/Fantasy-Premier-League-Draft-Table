@@ -28,7 +28,7 @@ public class ResultController {
 
     @ModelAttribute
     public void addMonthList(Model model) {
-        MonthProvider monthProvider = new MonthProvider();
+        var monthProvider = new MonthProvider();
         List<Month> months = monthProvider.getList();
         model.addAttribute("months", months);
     }
@@ -41,7 +41,8 @@ public class ResultController {
     }
 
     @RequestMapping("{id}/{month}")
-    public String displayResults(@PathVariable("id") String id, @PathVariable("month") String month,
+    public String displayResults(@PathVariable("id") String id,
+                                 @PathVariable("month") String month,
                                  @ModelAttribute UserInput userInput, Model model) {
         if (month.equals("current")) {
             month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH) + 1);
@@ -54,39 +55,39 @@ public class ResultController {
             return "error";
         }
 
-        userInput.setId(Integer.parseInt(id));
         try {
-            List<Player> players = getLeagueTable(id, monthValue);
-            League league = new League();
-            List<Player> ordered = league.getOrderedList(players);
-            //List<Player> players = league.getOrderedList(id, Integer.parseInt(month));
-            model.addAttribute("players", ordered);
+            List<Player> players = getDataForAllPlayersInLeague(id, Integer.parseInt(month));
+            model.addAttribute("players", players);
+            userInput.setId(Integer.parseInt(id));
         } catch (FplResponseException e) {
             return "team-not-found";
         }
         return "result";
     }
 
-    private List<Player> getLeagueTable(String playerIdentifier, int month) throws FplResponseException {
+    private List<Player> getDataForAllPlayersInLeague(String playerIdentifier, int month) throws FplResponseException {
         List<Player> players = new ArrayList<>();
         try {
-            PlayerData initialPlayer = new PlayerData(playerIdentifier);
-            LeagueData leagueData = new LeagueData(initialPlayer.getLeagueIdentifier());
-
+            var initialPlayer = new PlayerData(playerIdentifier);
+            var leagueData = new LeagueData(initialPlayer.getLeagueIdentifier());
             List<String> playerIds = leagueData.getPlayerIds();
             for (String id : playerIds) {
                 PlayerData player = new PlayerData(id);
-                players.add(new Player(player.getName(), player.getTeam(), player.getScore(getMonthFromValue(month))));
+                String playerName = player.getName();
+                String teamName = player.getTeam();
+                int total = player.getScore(getMonthFromValue(month));
+                players.add(new Player(playerName, teamName, total));
             }
-
         } catch (IOException exception) {
-            throw new FplResponseException("Unable to get data from the draft FPL API", exception);
+            throw new FplResponseException("Unable to get data from FPL API", exception);
         }
-        return players;
+        var league = new League();
+        return league.sortByScore(players);
     }
 
+
     private GameMonth getMonthFromValue(int value) {
-        GameMonth gameweekMonth = GameMonth.NOVEMBER;
+        GameMonth gameweekMonth;
         switch (value) {
             case 1:
                 gameweekMonth = GameMonth.JANUARY;
@@ -118,8 +119,9 @@ public class ResultController {
             case 12:
                 gameweekMonth = GameMonth.DECEMBER;
                 break;
+            default:
+                gameweekMonth = GameMonth.SEPTEMBER;
         }
         return gameweekMonth;
     }
-
 }
