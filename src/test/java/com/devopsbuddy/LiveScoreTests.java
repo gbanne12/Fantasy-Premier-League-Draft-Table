@@ -2,6 +2,7 @@ package com.devopsbuddy;
 
 import com.devopsbuddy.fpl.json.JsonRequester;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +17,9 @@ import java.util.List;
 @SpringBootTest
 public class LiveScoreTests {
 
+	/* FIXME: Test no longer runs after r */
 	@Test
-	public void canGetLiveTotals() throws IOException {
+	public void canGetLiveTotals() throws IOException, JSONException {
 		String id = "235052";
 		JSONObject playerData = new JsonRequester().get("https://draft.premierleague.com/api/entry/" + id + "/history");
 		JSONArray scores = (JSONArray) (playerData).get("history");
