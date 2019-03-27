@@ -24,6 +24,18 @@
     <link rel="stylesheet" href="/skeleton.css"/>
     <link rel="stylesheet" href="/custom.css"/>
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137148214-1"></script>
+    <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'UA-137148214-1');
+
+    </script>
+
+
 </head>
 <body>
 
@@ -36,13 +48,13 @@
             <p> You can find your team id in the address bar when viewing the game week Points tab.
                 <a href="/how-to"> More info</a></p>
 
-               <form action="#" th:object="${userInput}" th:action="@{/result}" method="post">
+            <form action="#" th:object="${userInput}" th:action="@{/result}" method="post">
 
-                <select th:id="month" th:name="month" >
+                <select th:id="month" th:name="month">
                     <option th:each="option : ${months}"
                             th:value="${option.value}"
                             th:text="${option.name}"
-                            th:selected="${currentMonth == option.value}" >
+                            th:selected="${currentMonth == option.value}">
                     </option>
                 </select>
 
