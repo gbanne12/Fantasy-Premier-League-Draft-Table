@@ -11,7 +11,6 @@ public class MonthProvider {
 
     public MonthProvider() {
         months = new ArrayList<>();
-        months.add(new Month("August", 8));
         months.add(new Month("September", 9));
         months.add(new Month("October", 10));
         months.add(new Month("November", 11));
