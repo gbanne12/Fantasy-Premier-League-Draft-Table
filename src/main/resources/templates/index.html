@@ -43,19 +43,35 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
     <div id="content" class="row">
-        <div class="one-half column" style="margin-top: 25%">
+        <div class="one-half column" style="margin-top: 10%">
+
+            <h3> <span th:text="${headerMonth}"> </span> Table </h3>
 
             <form action="#" th:object="${userInput}" th:action="@{/result}" method="post">
+                    <div class="col-sm-12">
+                        <table class="table table-hover">
+                            <tr>
+                                <th class="fpl-green">Team</th>
+                                <th class="fpl-green">Player</th>
+                                <th class="fpl-green">Total</th>
+                            </tr>
+                            <tr th:each="players: ${players}">
+                                <td th:text="${players.teamName}"></td>
+                                <td th:text="${players.playerName}"></td>
+                                <td th:text="${players.total}"></td>
+                            </tr>
+                        </table>
+                    </div>
 
-                <select th:id="month" th:name="month">
-                    <option th:each="option : ${months}"
-                            th:value="${option.value}"
-                            th:text="${option.name}"
-                            th:selected="${currentMonth} == {option.value}">
-                    </option>
-                </select>
+                    <select th:id="month" th:name="month">
+                        <option th:each="choice : ${months}"
+                                th:value="${choice.value}"
+                                th:selected="${choice.isSelected(choice.value)}"
+                                th:text="${choice.name}"></option>
+                    </select>
 
-                <p><input id="submit-button" class="button-primary" type="submit" value="Submit"/></p>
+
+                    <input id="submit-button" class="button-primary" type="submit" value="Submit"/>
             </form>
 
         </div>

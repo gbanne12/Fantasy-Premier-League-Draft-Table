@@ -41,6 +41,8 @@
     <div id="content" class="row">
         <div class="one-half column" style="margin-top: 10%">
 
+            <h3> <span th:text="${headerMonth}"> </span> Table </h3>
+
             <form action="#" th:action="@{/result}" th:object="${userInput}" method="post">
 
                 <div class="col-sm-12">
@@ -58,7 +60,7 @@
                     </table>
                 </div>
 
-                <select th:id="month" th:field="*{month}">
+                <select th:field="*{month}">
                     <option th:each="option : ${months}"
                             th:value="${option.value}"
                             th:text="${option.name}">

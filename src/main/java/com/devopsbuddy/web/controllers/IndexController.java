@@ -31,17 +31,17 @@ public class IndexController {
 
     @GetMapping("/")
     public String indexPage(Model model) {
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        model.addAttribute("currentMonth", currentMonth);
+        int headerMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        model.addAttribute("headerMonth", getMonthFromValue(headerMonth));
         model.addAttribute("userInput", new UserInput());
 
         try {
-            List<Player> players = getDataForAllPlayersInLeague("449006", currentMonth);
-            model.addAttribute("players", players);
+            List<Player> players = getDataForAllPlayersInLeague("568444", headerMonth);
+          model.addAttribute("players", players);
         } catch (FplResponseException e) {
             return "team-not-found";
         }
-        return "result";
+        return "index";
     }
 
     private List<Player> getDataForAllPlayersInLeague(String playerIdentifier, int month) throws FplResponseException {
