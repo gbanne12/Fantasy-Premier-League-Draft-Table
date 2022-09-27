@@ -50,7 +50,6 @@ public class IndexController {
             var initialPlayer = new PlayerData(playerIdentifier);
             var leagueData = new LeagueData(initialPlayer.getLeagueIdentifier());
             List<String> playerIds = leagueData.getPlayerIds();
-            System.out.println("'''''''''''''''''''");
             for (String id : playerIds) {
                 PlayerData player = new PlayerData(id);
                 String playerName = player.getName();
@@ -60,7 +59,6 @@ public class IndexController {
                 System.out.println(playerName + " - " + total);
                 players.add(new Player(playerName, teamName, total));
             }
-            System.out.println("'''''''''''''''''''");
         } catch (IOException exception) {
             throw new FplResponseException("Unable to get data from FPL API", exception);
         }
@@ -87,6 +85,10 @@ public class IndexController {
             case 5:
                 gameweekMonth = GameMonth.MAY;
                 break;
+            case 8:
+            default:
+                gameweekMonth = GameMonth.AUGUST;
+                break;
             case 9:
                 gameweekMonth = GameMonth.SEPTEMBER;
                 break;
@@ -99,8 +101,6 @@ public class IndexController {
             case 12:
                 gameweekMonth = GameMonth.DECEMBER;
                 break;
-            default:
-                gameweekMonth = GameMonth.SEPTEMBER;
         }
         return gameweekMonth;
     }

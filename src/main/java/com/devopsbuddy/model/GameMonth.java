@@ -2,14 +2,15 @@ package com.devopsbuddy.model;
 
 public enum GameMonth {
 
-    SEPTEMBER(1, 3),
-    OCTOBER(4, 7),
-    NOVEMBER(8, 10),
-    DECEMBER(11, 16),
-    JANUARY(17, 21),
-    FEBRUARY(22, 26),
-    MARCH(27, 29),
-    APRIL(30, 34),
+    AUGUST(1, 5),
+    SEPTEMBER(6, 8),
+    OCTOBER(9, 14),
+    NOVEMBER(15, 16),
+    DECEMBER(17, 18),
+    JANUARY(19, 21),
+    FEBRUARY(22, 25),
+    MARCH(26, 28),
+    APRIL(29, 34),
     MAY(35, 38);
 
     private final int startWeek;

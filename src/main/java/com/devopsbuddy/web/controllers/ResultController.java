@@ -36,13 +36,15 @@ public class ResultController {
     @PostMapping("/result")
     public ModelAndView redirect(@ModelAttribute UserInput userInput, ModelMap model) {
         model.addAttribute("month", userInput.getMonth());
-        return new ModelAndView("redirect:/449006/{month}", model);
+        return new ModelAndView("redirect:/568444/{month}", model);
     }
 
     @RequestMapping("{id}/{month}")
     public String displayResults(@PathVariable("id") String id,
                                  @PathVariable("month") String month,
                                  @ModelAttribute UserInput userInput, Model model) {
+        model.addAttribute("headerMonth", getMonthFromValue(Integer.parseInt(month)));
+
         if (month.equals("current")) {
             month = Integer.toString(Calendar.getInstance().get(Calendar.MONTH) + 1);
             userInput.setMonth(month);
@@ -102,6 +104,10 @@ public class ResultController {
             case 5:
                 gameweekMonth = GameMonth.MAY;
                 break;
+            case 8:
+            default:
+                gameweekMonth = GameMonth.AUGUST;
+                break;
             case 9:
                 gameweekMonth = GameMonth.SEPTEMBER;
                 break;
@@ -114,8 +120,6 @@ public class ResultController {
             case 12:
                 gameweekMonth = GameMonth.DECEMBER;
                 break;
-            default:
-                gameweekMonth = GameMonth.SEPTEMBER;
         }
         return gameweekMonth;
     }
