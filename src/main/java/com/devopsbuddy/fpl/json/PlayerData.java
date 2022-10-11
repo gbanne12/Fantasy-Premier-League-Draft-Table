@@ -36,8 +36,9 @@ public class PlayerData {
         if (firstMonthOfSeason) {
             initialScore = 0;
         } else {
+            int lastWeekInPreviousMonth = month.getStartWeek() - 1;
             initialScore = Integer.parseInt(
-                    ((JSONObject) scores.get(month.getStartWeek() - 1)).get("total_points").toString());
+                    ((JSONObject) scores.get(lastWeekInPreviousMonth - 1)).get("total_points").toString());
         }
 
 
